@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE version SYSTEM "../../../lib/pkp/dtd/pluginVersion.dtd">
+
+<!--
+  * plugins/generic/converver/version.xml
+  *
+  * Copyright (c) 2016 Convertidor XML elaborado por eScire con revisiones de SciELO México
+  *
+  * Plugin version information.
+  -->
+<version>
+	<application>converter</application>
+	<type>plugins.generic</type>
+	<release>1.0.0.0</release>
+	<date>2015-01-27</date>
+	<lazy-load>1</lazy-load>
+	<class>ConverterPlugin</class>
+</version>

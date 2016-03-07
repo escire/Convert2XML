@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE locale SYSTEM "../../../../../lib/pkp/dtd/locale.dtd">
+<!--
+  * plugins/generic/customBlockManager/locale/es_ES/locale.xml
+  *
+  * Copyright (c) 2013-2015 Simon Fraser University Library
+  * Copyright (c) 2003-2015 John Willinsky
+  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+  *
+  * Credits: http://pkp.sfu.ca/wiki/index.php?title=OJS:_Spanish_%28es_ES%29
+  *
+  * Localization strings.
+  -->
+ 
+<locale name="en_US" full_name="U.S. English">
+  <message key="plugins.generic.converter.requiredSettings">Please fill required plugin settings</message>
+	<message key="plugins.generic.converter.title">convert2xml</message>
+  <message key="plugins.generic.converter.displayName">convert2xml plugin</message>
+  <message key="plugins.generic.converter.description">Convert galley file to HTML, XML, o PDF format</message>
+  <message key="plugins.generic.converter.guia">Based on the document .::Preparación de archivos para la marcación XML::. produced by SciELO México</message>
+  <message key="plugins.generic.converter.guia2">To convert to XML owes its OJS must have captured: Title, Initials and Abbreviation of the journal</message>
+  <message key="plugins.generic.converter.leyenda">XML converter prepared by eScire with reviews SciELO Mexico</message>
+  <message key="plugins.generic.converter.convert">Convert to HTML</message>
+  <message key="plugins.generic.converter.register">Sign Up</message>
+  <message key="plugins.generic.converter.register2">for unlimited conversions for 30 days</message>
+  <message key="plugins.generic.converter.convertXML">Convert to XML</message>
+  <message key="plugins.generic.converter.select.file">Select file to convert:</message>
+  <message key="plugins.generic.converter.converting">Converting document...</message>
+  <message key="plugins.generic.converter.downloadzip">Download ZIP HTML</message>
+  <message key="plugins.generic.converter.downloadzipxml">Download ZIP XML</message>
+  <message key="plugins.generic.converter.settings">Settings</message>
+  <message key="plugins.generic.converter.settings.userClientToolTip">Value provided by eScire</message>
+  <message key="plugins.generic.converter.settings.userPassToolTip">Value provided by eScire</message>
+  <message key="plugins.generic.converter.settings.wsURLToolTip">Demo: http://converter.escire.mx/convertir.aspx?</message>
+  <message key="plugins.generic.converter.settings.userName">User</message>
+  <message key="plugins.generic.converter.settings.userPassword">Password</message>
+  <message key="plugins.generic.converter.settings.userPass">Password</message>
+  <message key="plugins.generic.converter.settings.wsURL">WebService URL</message>
+  <message key="plugins.generic.converter.settings.userClient">User</message>
+  <message key="plugins.generic.converter.settings.userClientRequired">User required</message>
+  <message key="plugins.generic.converter.settings.userPassRequired">Password required</message>
+  <message key="plugins.generic.converter.settings.wsURLRequired">WebService URL required</message>
+  <message key="plugins.generic.converter.settings.userNameRequired">User name required</message>
+  <message key="plugins.generic.converter.settings.userPasswordRequired">Password required</message>
+  <message key="plugins.generic.converter.settings.description">Convert word documents to HTML files</message>
+  <message key="plugins.generic.converter.statusMessage">Please wait while process finish</message> 
+  <message key="plugins.generic.converter.error.permission">Please check files folder write permissions at plugins directory</message>
+  <message key="plugins.generic.converter.error.conection">Service not available, try again later</message>
+  <message key="plugins.generic.converter.gateway.errorZip">Please install or enable PHP ZIP extension</message>
+  <message key="plugins.generic.converter.gateway.uploadingFile">Uploading file</message>
+  <message key="plugins.generic.converter.gateway.displayName">Gateway plugin</message>
+  <message key="plugins.generic.converter.gateway.description">Process the convertation status message</message>
+  <message key="plugins.generic.converter.gateway.importingImage">Importing image</message>
+  <message key="plugins.generic.converter.gateway.successImport">Successfully imported</message>
+  <message key="plugins.generic.converter.gateway.convertedFileError">Error getting file from remote server. Please contact the service provider</message>
+  <message key="plugins.generic.converter.gateway.importingDocument">Importing document</message>
+  <message key="plugins.generic.converter.fileversion.finalCopyeditFile">Edition (Final correction)</message>
+  <message key="plugins.generic.converter.fileversion.editorAuthorCopyeditFile">Edition (Correction author)</message>
+  <message key="plugins.generic.converter.fileversion.copyeditFile">Edition (Initial correction)</message>
+  <message key="plugins.generic.converter.fileversion.submissionFile">Original file</message>
+  <message key="plugins.generic.converter.fileversion.initialCopyeditFile">Edition (final file)</message>
+</locale>
