@@ -1,8 +1,0 @@
-C:\Users\server\Desktop\convertidor\convertidor\bin\convertidor.dll.config
-C:\Users\server\Desktop\convertidor\convertidor\bin\convertidor.dll
-C:\Users\server\Desktop\convertidor\convertidor\bin\convertidor.pdb
-C:\Users\server\Desktop\convertidor\convertidor\bin\Newtonsoft.Json.dll
-C:\Users\server\Desktop\convertidor\convertidor\obj\Debug\convertidor.csproj.ResolveComReference.cache
-C:\Users\server\Desktop\convertidor\convertidor\obj\Debug\convertidor.dll
-C:\Users\server\Desktop\convertidor\convertidor\obj\Debug\convertidor.pdb
-C:\Users\server\Desktop\convertidor\convertidor\obj\Debug\convertidor.csprojResolveAssemblyReference.cache
