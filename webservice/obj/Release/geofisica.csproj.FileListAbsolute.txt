@@ -1,0 +1,16 @@
+C:\Users\servidor\Documents\Visual Studio 2013\Projects\geofisica\geofisica\geofisica\bin\geofisica.dll.config
+C:\Users\servidor\Documents\Visual Studio 2013\Projects\geofisica\geofisica\geofisica\bin\geofisica.dll
+C:\Users\servidor\Documents\Visual Studio 2013\Projects\geofisica\geofisica\geofisica\bin\geofisica.pdb
+C:\Users\servidor\Documents\Visual Studio 2013\Projects\geofisica\geofisica\geofisica\obj\Release\geofisica.csproj.ResolveComReference.cache
+C:\Users\servidor\Documents\Visual Studio 2013\Projects\geofisica\geofisica\geofisica\obj\Release\geofisica.dll
+C:\Users\servidor\Documents\Visual Studio 2013\Projects\geofisica\geofisica\geofisica\obj\Release\geofisica.pdb
+C:\Users\servidor\Documents\Visual Studio 2013\Projects\geofisica\geofisica\geofisica\obj\Release\geofisica.csprojResolveAssemblyReference.cache
+C:\Users\servidor\Documents\Visual Studio 2013\Projects\geofisica\geofisica\geofisica\bin\Newtonsoft.Json.dll
+C:\Users\servidor\Documents\Visual Studio 2013\Projects\geofisica\geofisica\geofisica\bin\Ionic.Zip.dll
+C:\Users\server\Desktop\geofisica\geofisica\bin\geofisica.dll.config
+C:\Users\server\Desktop\geofisica\geofisica\bin\geofisica.dll
+C:\Users\server\Desktop\geofisica\geofisica\bin\geofisica.pdb
+C:\Users\server\Desktop\geofisica\geofisica\bin\Newtonsoft.Json.dll
+C:\Users\server\Desktop\geofisica\geofisica\obj\Release\geofisica.csproj.ResolveComReference.cache
+C:\Users\server\Desktop\geofisica\geofisica\obj\Release\geofisica.dll
+C:\Users\server\Desktop\geofisica\geofisica\obj\Release\geofisica.pdb
