@@ -37,7 +37,7 @@ THIS SOFTWARE IS PROVIDED "AS IS" BY THE CREATORS AND CONTRIBUTORS AND ANY EXPRE
 
 - [Acerca de](#acerca-de)
 - [Licencia](#licencia)
-- 
+- [Aviso de renuncia](#aviso-de-renuncia)
 
 ## Acerca de
 
@@ -47,3 +47,13 @@ El equipo de eScire ha trabajado con más de 200 revistas en el proceso de adopc
 El Converter2XML fue desarrollado por eScire con la supervisión del equipo de SciELO México.
 
 ## Licencia
+
+Este programa es Software Libre; Ud. puede redistribuirlo y/o modificarlo bajo los términos de la Licencia Pública General GNU tal como está publicada por la Free Software Foundation; ya sea la versión 3 de la licencia, o (según su elección) cualquier otra versión posterior.
+
+Este programa se distribuye con la esperanza de que sea útil, pero SIN NINGUNA GARANTÍA; incluso sin las garantías de COMERCIALIZACIÓN o USABILIDAD O UTILIDAD PARA USOS PARTICULARES. Vea la Licencia Pública General GNU para más detalles.
+
+Ud. debería haber recibido una copia de la Licencia Pública General GNU junto con este programa; si no la ha recibido, vea <http://www.gnu.org/licenses/>.
+
+## Aviso de renuncia
+
+Este software se proporciona "TAL CUAL" por los creadores y contribuidores, SIN GARANTÍAS DE NINGÚN TIPO, YA SEAN EXPLÍCITAS O IMPLÍCITAS, INCLUIDAS, ENTRE OTRAS, GARANTÍAS IMPLÍCITAS DE COMERCIABILIDAD, GARANTÍAS DE IDONEIDAD PARA UN FIN DETERMINADO O GARANTÍAS DE NO INFRACCIÓN. Los creadores y contribuidores no se hacen responsables ante cualquier particular o entidad de ningún daño especial, indirecto, secundario o consecuente incluidos, entre otros, los daños derivados del uso o la confianza en el software, las pérdidas de beneficios o ingresos, así como los costes derivados del reemplazo de productos, aun cuando se haya notificado la posible existencia de dichos daños.
