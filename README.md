@@ -13,10 +13,10 @@
 
 ## About
 
-eScire it's a consultancy on free software for management of libraries, information and knowledge based on copyleft movement. 
-Their team has worked with more than 200 scientific journals on the process of Open Journal Systems adoption in their editorial workflow.
+[eScire](http://escire.mx/) it's a consultancy on free software for management of libraries, information and knowledge based on copyleft movement. 
+Their team has worked with more than 200 scientific journals on the process of ["Open Journal Systems"](https://pkp.sfu.ca/ojs/) adoption in their editorial workflow.
 
-Converter2XML was developed by eScire and supervised by SciELO Mexico team. 
+Converter2XML was developed by [eScire](http://escire.mx/) and supervised by [SciELO Mexico](http://www.scielo.org.mx/scielo.php) team. It's a plug-in which is installed in the system ["Open Journal Systems"](https://pkp.sfu.ca/ojs/) developed by ["Public Knowledge Project"](https://pkp.sfu.ca/).
 
 ## License
 
@@ -51,10 +51,10 @@ pass: convert2xml
 
 ## Acerca de
 
-eScire es una consultoría en software libre para la gestión de bibliotecas, información y conocimiento, basado en la filosofía del copyleft.
-El equipo de eScire ha trabajado con más de 200 revistas en el proceso de adopción de Open Journal Systems en su proceso editorial. 
+[eScire](http://escire.mx/) es una consultoría en software libre para la gestión de bibliotecas, información y conocimiento, basado en la filosofía del copyleft.
+El equipo de eScire ha trabajado con más de 200 revistas en el proceso de adopción de ["Open Journal Systems"](https://pkp.sfu.ca/ojs/) en su proceso editorial. 
 
-El Converter2XML fue desarrollado por eScire con la supervisión del equipo de SciELO México.
+El Converter2XML fue desarrollado por [eScire](http://escire.mx/) con la supervisión del equipo de [SciELO México](http://www.scielo.org.mx/scielo.php). Es un plug-in que se instala en el sistema ["Open Journal Systems"](https://pkp.sfu.ca/ojs/) desarrollado por ["Public Knowledge Project"](https://pkp.sfu.ca/).
 
 ## Licencia
 
