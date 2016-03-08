@@ -32,9 +32,7 @@ THIS SOFTWARE IS PROVIDED "AS IS" BY THE CREATORS AND CONTRIBUTORS AND ANY EXPRE
 
 ## Demo
 http://ojs.escire.net/demo/index.php/escire
-
 user: demo
-
 pass: convert2xml
 
 ![DemoEng](http://escire.net/convert2xml/demo_english.jpg)
@@ -73,9 +71,7 @@ Este software se proporciona "TAL CUAL" por los creadores y contribuidores, SIN 
 ## Prueba
 
 http://ojs.escire.net/demo/index.php/escire
-
 user: demo
-
 pass: convert2xml
 
 ![DemoEsp](http://escire.net/convert2xml/demo_espanol.jpg)
