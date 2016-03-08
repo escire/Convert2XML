@@ -1,7 +1,8 @@
 # Convert2XML
-![eScire](http://escire.mx/logo/eScire.jpg)
 
-- [Ver en español](#español)
+<p align="center">English | [Español](#español)</p>
+
+![eScire](http://escire.mx/logo/eScire.jpg)
 
 ## Contents
 
@@ -32,6 +33,8 @@ THIS SOFTWARE IS PROVIDED "AS IS" BY THE CREATORS AND CONTRIBUTORS AND ANY EXPRE
 <hr />
 
 ## Español
+
+![eScire](http://escire.mx/logo/eScire.jpg)
 
 ## Contenido
 
