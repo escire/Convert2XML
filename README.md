@@ -31,10 +31,14 @@ You should have received a copy of the GNU General Public License along with thi
 THIS SOFTWARE IS PROVIDED "AS IS" BY THE CREATORS AND CONTRIBUTORS AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE CREATORS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Demo
-![DemoEng](http://escire.net/convert2xml/demo_english.jpg)
 http://ojs.escire.net/demo/index.php/escire
+
 user: demo
+
 pass: convert2xml
+
+![DemoEng](http://escire.net/convert2xml/demo_english.jpg)
+
 
 <hr />
 
@@ -67,7 +71,11 @@ Ud. debería haber recibido una copia de la Licencia Pública General GNU junto 
 Este software se proporciona "TAL CUAL" por los creadores y contribuidores, SIN GARANTÍAS DE NINGÚN TIPO, YA SEAN EXPLÍCITAS O IMPLÍCITAS, INCLUIDAS, ENTRE OTRAS, GARANTÍAS IMPLÍCITAS DE COMERCIABILIDAD, GARANTÍAS DE IDONEIDAD PARA UN FIN DETERMINADO O GARANTÍAS DE NO INFRACCIÓN. Los creadores y contribuidores no se hacen responsables ante cualquier particular o entidad de ningún daño especial, indirecto, secundario o consecuente incluidos, entre otros, los daños derivados del uso o la confianza en el software, las pérdidas de beneficios o ingresos, así como los costes derivados del reemplazo de productos, aun cuando se haya notificado la posible existencia de dichos daños.
 
 ## Prueba
-![DemoEsp](http://escire.net/convert2xml/demo_espaniol.jpg)
+
 http://ojs.escire.net/demo/index.php/escire
+
 user: demo
+
 pass: convert2xml
+
+![DemoEsp](http://escire.net/convert2xml/demo_espanol.jpg)
