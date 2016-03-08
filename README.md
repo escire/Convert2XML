@@ -1,6 +1,6 @@
 # Convert2XML
 
-![eScire](http://escire.mx/logo/eScire.jpg)
+![eScire](http://escire.net/convert2xml/logo_convert2xml.jpg)
 
 - [Ver en Español](#español)
 
