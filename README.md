@@ -1,7 +1,7 @@
 # Convert2XML
 ![eScire](http://escire.mx/logo/eScire.jpg)
 
-- [Ver en español](#espanol)
+- [Ver en español](#español)
 
 ## Contents
 
