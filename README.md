@@ -31,8 +31,8 @@ You should have received a copy of the GNU General Public License along with thi
 THIS SOFTWARE IS PROVIDED "AS IS" BY THE CREATORS AND CONTRIBUTORS AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE CREATORS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Demo
-http://ojs.escire.net/demo/index.php/escire
-user: demo
+http://ojs.escire.net/demo/index.php/escire<br />
+user: demo<br />
 pass: convert2xml
 
 ![DemoEng](http://escire.net/convert2xml/demo_english.jpg)
@@ -70,8 +70,8 @@ Este software se proporciona "TAL CUAL" por los creadores y contribuidores, SIN 
 
 ## Prueba
 
-http://ojs.escire.net/demo/index.php/escire
-user: demo
-pass: convert2xml
+http://ojs.escire.net/demo/index.php/escire<br />
+usuario: demo<br />
+contraseña: convert2xml
 
 ![DemoEsp](http://escire.net/convert2xml/demo_espanol.jpg)
