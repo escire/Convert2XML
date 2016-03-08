@@ -31,6 +31,8 @@ THIS SOFTWARE IS PROVIDED "AS IS" BY THE CREATORS AND CONTRIBUTORS AND ANY EXPRE
 
 <hr />
 
+## Español
+
 ## Contenido
 
 - [Acerca de](#acerca-de)
