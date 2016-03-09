@@ -7,24 +7,24 @@
 
 ## Español
 
-El proyecto **Convert2XML** está compuesto por dos desarrollos necesarios para su funcionamiento: un plugin que se integra al sistema Open Journal Systems y un servicio web que se encarga de procesar la conversión de los archivos. A continuación se indican los requerimientos y las instrucciones de instalación para cada desarrollo:
+**Convert2XML** está compuesto por dos desarrollos necesarios para su funcionamiento: un plugin que se integra al sistema Open Journal Systems y un servicio web que se encarga de procesar la conversión de los archivos. A continuación se indican los requerimientos y las instrucciones de instalación para cada desarrollo:
 
 ### Servicio web
 
-**Requerimientos**
+#### Requerimientos
 - Windows Server
 - Microsoft Office 2013 (Word)
 - IIS Express
 - Visual Studio 2013
 
-**Instalación**
+#### Instalación
 
 1. Descargar los archivos de la carpeta "webservice".
 2. Crear un paquete de implementación en el equipo de origen utilizando Visual Studio 2013.
 3. En IIS, crear una nueva entrada en el archivo "config\applicationhost.config" dentro de "sites".
 4. Iniciar IIS.
 
-## Plugin
+### Plugin
 
 1. Descarga los archivos de la carpeta "plugin_ojs", comprímelos y nombra al archivo: converter.tar.gz.
 2. Ingresa a tu revista como gestor.
