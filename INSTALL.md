@@ -3,6 +3,7 @@
 ![eScire](http://escire.net/convert2xml/logo_convert2xml.jpg)
 
 ## English
+\([Ver en español](#español)\)
 
 **Convert2XML** is composed of two developments required for its operation: a plugin that integrates into the system "Open Journal Systems" and a webservice that is responsible for processing the file conversion. Below are the requirements and installation instructions for each development.:
 
@@ -36,6 +37,7 @@ it should be placed just before the line:<br />
 {include file="sectionEditor/submission/layout.tpl"}
 
 ## Español
+\([View in english](#english)\)
 
 **Convert2XML** está compuesto por dos desarrollos necesarios para su funcionamiento: un plugin que se integra al sistema Open Journal Systems y un servicio web que se encarga de procesar la conversión de los archivos. A continuación se indican los requerimientos y las instrucciones de instalación para cada desarrollo:
 
