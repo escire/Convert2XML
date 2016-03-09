@@ -33,7 +33,7 @@
 5. Instala  el archivo converter.tar.gz.
 6. Dentro de módulos genéricos, ve a la configuración del módulo y escribe los datos: usuario, contraseña y url del servicio web. Si lo deseas puedes regístrate en http://converter.escire.mx/admin/Registro.aspx para probar nuestro servicio web por 30 días gratis.
 7. Al momento de instalar el convertidor se va a crear un usuario con permisos de editor, no edite el usuario, edite los datos de este usuario en el archivo ConverterPlugin.inc.php.
-8. Agregue el hook de llamado en el archivo: "[OJS]/templates/sectionEditor/submissionEditing.tpl". Edite el archivo agregando la siguiente línea:
-{call_hook name="Converter"}
-deberá colocarla justo antes la línea:
+8. Agregue el hook de llamado en el archivo: "[OJS]/templates/sectionEditor/submissionEditing.tpl". Edite el archivo agregando la siguiente línea:<br />
+{call_hook name="Converter"}<br />
+deberá colocarla justo antes la línea:<br />
 {include file="sectionEditor/submission/layout.tpl"}
