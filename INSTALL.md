@@ -4,7 +4,7 @@
 
 ## English
 
-**Convert2XML** is composed of two developments required for its operation: a plugin that integrates into the system "Open Journal Systems" and a Webservice that is responsible for processing the file conversion. Below are the requirements and installation instructions for each development.:
+**Convert2XML** is composed of two developments required for its operation: a plugin that integrates into the system "Open Journal Systems" and a webservice that is responsible for processing the file conversion. Below are the requirements and installation instructions for each development.:
 
 ### Webservice
 
