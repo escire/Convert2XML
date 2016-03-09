@@ -35,6 +35,5 @@
 7. Al momento de instalar el convertidor se va a crear un usuario con permisos de editor, no edite el usuario, edite los datos de este usuario en el archivo ConverterPlugin.inc.php.
 8. Agregue el hook de llamado en el archivo: "[OJS]/templates/sectionEditor/submissionEditing.tpl". Edite el archivo agregando la siguiente línea:
 {call_hook name="Converter"}
-
 deberá colocarla justo antes la línea:
 {include file="sectionEditor/submission/layout.tpl"}
