@@ -66,7 +66,7 @@ Ud. debería haber recibido una copia de la Licencia Pública General GNU junto 
 
 ## Aviso de renuncia
 
-Este software se proporciona "TAL CUAL" por los creadores y contribuidores, SIN GARANTÍAS DE NINGÚN TIPO, YA SEAN EXPLÍCITAS O IMPLÍCITAS, INCLUIDAS, ENTRE OTRAS, GARANTÍAS IMPLÍCITAS DE COMERCIABILIDAD, GARANTÍAS DE IDONEIDAD PARA UN FIN DETERMINADO O GARANTÍAS DE NO INFRACCIÓN. Los creadores y contribuidores no se hacen responsables ante cualquier particular o entidad de ningún daño especial, indirecto, secundario o consecuente incluidos, entre otros, los daños derivados del uso o la confianza en el software, las pérdidas de beneficios o ingresos, así como los costes derivados del reemplazo de productos, aun cuando se haya notificado la posible existencia de dichos daños.
+ESTE SOFTWARE SE PROPORCIONA "TAL CUAL" POR LOS CREADORES Y CONTRIBUIDORES, SIN GARANTÍAS DE NINGÚN TIPO, YA SEAN EXPLÍCITAS O IMPLÍCITAS, INCLUIDAS, ENTRE OTRAS, GARANTÍAS IMPLÍCITAS DE COMERCIABILIDAD, GARANTÍAS DE IDONEIDAD PARA UN FIN DETERMINADO O GARANTÍAS DE NO INFRACCIÓN. LOS CREADORES Y CONTRIBUIDORES NO SE HACEN RESPONSABLES ANTE CUALQUIER PARTICULAR O ENTIDAD DE NINGÚN DAÑO ESPECIAL, INDIRECTO, SECUNDARIO O CONSECUENTE INCLUIDOS, ENTRE OTROS, LOS DAÑOS DERIVADOS DEL USO O LA CONFIANZA EN EL SOFTWARE, LAS PÉRDIDAS DE BENEFICIOS O INGRESOS, ASÍ COMO LOS COSTES DERIVADOS DEL REEMPLAZO DE PRODUCTOS, AUN CUANDO SE HAYA NOTIFICADO LA POSIBLE EXISTENCIA DE DICHOS DAÑOS.
 
 ## Prueba
 
