@@ -11,6 +11,7 @@
 - [License](#license)
 - [Disclaimer](#disclaimer)
 - [Demo](#demo)
+- [Installation](#installation)
 
 ### About
 
@@ -38,6 +39,9 @@ pass: convert2xml
 
 ![DemoEng](http://escire.net/convert2xml/demo_english.jpg)
 
+### Installation
+
+For installation instructions, see file [INSTALL.md](INSTALL.md).
 
 ## Español
 \([View in english](#english)\)
@@ -48,6 +52,7 @@ pass: convert2xml
 - [Licencia](#licencia)
 - [Aviso de renuncia](#aviso-de-renuncia)
 - [Prueba](#prueba)
+- [Instalación](#instalación)
 
 ### Acerca de
 
@@ -75,3 +80,7 @@ usuario: demo<br />
 contraseña: convert2xml
 
 ![DemoEsp](http://escire.net/convert2xml/demo_espanol.jpg)
+
+### Instalación
+
+Para obtener las instrucciones de instalación, consulte el archivo [INSTALL.md](INSTALL.md).
