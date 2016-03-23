@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Drawing.Imaging;
 using System.Drawing;
+using System.IO.Compression;
 
 namespace convertidor
 {
@@ -30,6 +31,8 @@ namespace convertidor
 
         private Boolean anteriorDescipcionImagen = false;
         private String descipcionImagen = null;
+        private Dictionary<string, string> reemplazos = new Dictionary<string,string>();
+
 
         private Boolean anteriorDescipcionTable = false;
         private String descipcionTable = null;
@@ -269,13 +272,14 @@ namespace convertidor
                                 if ( !cursiva(doc.Paragraphs[x]) && alineacion(doc.Paragraphs[x], "wdAlignParagraphJustify")
                                     && tipoletra(doc.Paragraphs[x], "Times New Roman") && !vacio(doc.Paragraphs[x]) && tamano(doc.Paragraphs[x], 12))
                                 {
-                                    String temp = formateaTexto(doc.Paragraphs[x], articulo, "");
+                                    String temp = formateaTexto(doc.Paragraphs[x], articulo, "", x+1<=doc.Paragraphs.Count? doc.Paragraphs[x+1] : null);
                                     if (!String.IsNullOrEmpty(temp))
                                     {
                                         if (temp.Contains("<bold>"))
                                         {
                                             articulo.Resumen += "<sec>";
-                                            articulo.Resumen += formateaTexto(doc.Paragraphs[x], articulo, "").Replace("<bold>", "<title>").Replace("</bold>", "</title><p>");
+                                            articulo.Resumen += formateaTexto(doc.Paragraphs[x], articulo, "", (x + 1 <= doc.Paragraphs.Count ? doc.Paragraphs[x + 1] : null))
+                                                .Replace("<bold>", "<title>").Replace("</bold>", "</title><p>");
                                             articulo.Resumen += "</p></sec>";
                                         }
                                         else
@@ -337,13 +341,14 @@ namespace convertidor
                                         || texto(doc.Paragraphs[i]).StartsWith("Palavras chave:", true, null) || texto(doc.Paragraphs[i]).StartsWith("Palavras-chave:", true, null) || texto(doc.Paragraphs[i]).StartsWith("Palavraschave:", true, null))
                                     )
                                 {
-                                    String temp = formateaTexto(doc.Paragraphs[x], articulo, "");
+                                    String temp = formateaTexto(doc.Paragraphs[x], articulo, "", (x + 1 <= doc.Paragraphs.Count ? doc.Paragraphs[x + 1] : null) );
                                     if (!String.IsNullOrEmpty(temp))
                                     {
                                         if (temp.Contains("<bold>"))
                                         {
                                             articulo.Abstractt += "<sec>";
-                                            articulo.Abstractt += formateaTexto(doc.Paragraphs[x], articulo, "").Replace("<bold>", "<title>").Replace("</bold>", "</title><p>");
+                                            articulo.Abstractt += formateaTexto(doc.Paragraphs[x], articulo, "", (x + 1 <= doc.Paragraphs.Count ? doc.Paragraphs[x + 1] : null)
+                                                ).Replace("<bold>", "<title>").Replace("</bold>", "</title><p>");
                                             articulo.Abstractt += "</p></sec>";
                                         }
                                         else
@@ -399,7 +404,9 @@ namespace convertidor
                                 || texto(doc.Paragraphs[i]).ToLower().Contains("recepción")
                                 ))
                         {
-                            String fechare = extreaAnio( texto(doc.Paragraphs[i]) );
+                            String fechare = extraeFecha(texto(doc.Paragraphs[i]));
+                            if (String.IsNullOrEmpty(fechare))
+                                fechare = extreaAnio( texto(doc.Paragraphs[i]) );
                             articulo.Fecharecibido = fechare;
                             log += "<br/>*****fecha received: " + fechare + "<br/>";
                             j = i;
@@ -412,7 +419,9 @@ namespace convertidor
                             || texto(doc.Paragraphs[i]).ToLower().Contains("reviewed")
                             ))
                         {
-                            String fechare = extreaAnio( texto(doc.Paragraphs[i]) );
+                            String fechare = extraeFecha(texto(doc.Paragraphs[i]));
+                            if (String.IsNullOrEmpty(fechare))
+                                fechare = extreaAnio( texto(doc.Paragraphs[i]) );
                             articulo.Fecharevisado = fechare;
                             log += "<br/>*****fecha reviewed: " + fechare + "<br/>";
                             j = i;
@@ -425,7 +434,9 @@ namespace convertidor
                                         || texto(doc.Paragraphs[i]).ToLower().Contains("aceptación")
                                 ))
                         {
-                            String fechare = extreaAnio (texto(doc.Paragraphs[i]) );
+                            String fechare = extraeFecha(texto(doc.Paragraphs[i]));
+                            if (String.IsNullOrEmpty(fechare))
+                                fechare = extreaAnio(texto(doc.Paragraphs[i]));
                             articulo.Fechaaceptado = fechare;
                             log += "<br/>*****fecha Accepted: " + fechare + "<br/>";
                             j = i;
@@ -503,7 +514,7 @@ namespace convertidor
                                 SeccionBody temp = articulo.SectionsBody[ultimoSeccionBody];
 
                                 //String textoParrafo = texto(doc.Paragraphs[i]);
-                                String textoParrafo = formateaTexto(doc.Paragraphs[i], articulo, rutaImagenes);
+                                String textoParrafo = formateaTexto(doc.Paragraphs[i], articulo, rutaImagenes, (i + 1 <= doc.Paragraphs.Count ? doc.Paragraphs[i + 1] : null));
 
                                 if (abrirlista && !cerrarlista)
                                 {
@@ -562,7 +573,11 @@ namespace convertidor
                                         {
                                             tabla += "<thead><tr>";
                                             for (int ww = 1; ww <= columnas; ww++)
-                                                tabla += "<th>" + formateaTexto(doc.Tables[xx + 1].Cell(1, ww).Range, articulo, rutaImagenes) + "</th>";
+                                                try
+                                                {
+                                                    tabla += "<th>" + formateaTexto(doc.Tables[xx + 1].Cell(1, ww).Range, articulo, rutaImagenes, null) + "</th>";
+                                                }
+                                                catch (Exception ex) { }
                                             tabla += "</tr></thead>";
                                         }
                                         tabla += "<tbody>";
@@ -581,7 +596,7 @@ namespace convertidor
                                                 {
                                                     
                                                     String imagen = "";
-                                                    tabla += "<td>" + formateaTexto(celda.Range, articulo, rutaImagenes) + " " + imagen + "</td>";
+                                                    tabla += "<td>" + formateaTexto(celda.Range, articulo, rutaImagenes, null) + " " + imagen + "</td>";
                                                 }
                                                 else
                                                     tabla += "<td></td>";
@@ -591,9 +606,33 @@ namespace convertidor
                                             
                                         }
                                         tabla += "</tbody>";
-                                            tabla += "</table>"
-                                                    + "</table-wrap>";
+                                            tabla += "</table>";
+                                            tabla += "<attrib></attrib>"
+                                                  + "</table-wrap>";
 
+
+                                        String attrib = null;
+                                        int contador = i + (filas * columnas);
+                                        for (; contador <= doc.Paragraphs.Count; contador++ )
+                                        {
+                                            Microsoft.Office.Interop.Word.Range rangoTemp = doc.Paragraphs[contador].Range;
+                                            if (rangoTemp.Start >= range.End)
+                                            {
+                                                if (alineacion(doc.Paragraphs[contador], "wdAlignParagraphCenter") && tamano(doc.Paragraphs[contador], 10) && !negrita(doc.Paragraphs[contador]))
+                                                {
+                                                    attrib = texto(doc.Paragraphs[contador]);
+                                                    tabla = tabla.Replace("<attrib></attrib>", "<attrib>" + attrib + "</attrib>");
+                                                    reemplazos.Add("<p>" + attrib + "</p>", "");
+                                                    reemplazos.Add("(" + label.Trim().ToLower() + ")", "(<xref ref-type=\"table\" rid=\"t" + numeroTabla + 1 + "\">" + label.Trim().ToLower() + "</xref>)");
+                                                }
+                                                else
+                                                    tabla = tabla.Replace("<attrib></attrib>", "");
+                                                break;
+                                            }
+                                        }
+                                   
+                                        
+                                       
                                         if (String.IsNullOrEmpty(ultimoSubSeccionBody))
                                             temp.addParrafo(tabla);
                                         else
@@ -635,7 +674,7 @@ namespace convertidor
                         {
                             String refe = texto(doc.Paragraphs[i]);
                             Referencia referencia = new Referencia();
-                            referencia.Original = formateaTexto(doc.Paragraphs[i], articulo, rutaImagenes);
+                            referencia.Original = formateaTexto(doc.Paragraphs[i], articulo, rutaImagenes, (i + 1 <= doc.Paragraphs.Count ? doc.Paragraphs[i + 1] : null));
                             //buscar paginas
                             foreach (String tmp in refe.Split(",.".ToCharArray()))
                             {
@@ -735,7 +774,7 @@ namespace convertidor
         }
 
 
-        public String formateaTexto(Range rango, Articulo articulo, String rutaGuardar)
+        public String formateaTexto(Range rango, Articulo articulo, String rutaGuardar, Microsoft.Office.Interop.Word.Paragraph parrafoSiguiente)
         {
             if (rango == null || String.IsNullOrEmpty(rango.Text))
                 return "";
@@ -852,31 +891,60 @@ namespace convertidor
                                         imageFile.Write(bytes, 0, bytes.Length);
                                         imageFile.Flush();
                                     }
+
+                                    if (nombreArchivo.EndsWith(".wmz"))
+                                    {
+                                        using (Stream inputStream = new FileStream(pathImagen, FileMode.Open))
+                                        {
+                                            using (GZipStream gzipStream = new GZipStream(inputStream, CompressionMode.Decompress))
+                                            {
+                                                Image i = Image.FromStream(gzipStream);
+                                                i.Save(pathImagen.Replace(".wmz", ".png"), ImageFormat.Png);
+                                                nombreArchivo = nombreArchivo.Replace(".wmz", ".png");
+                                            }
+                                        }
+                                        File.Delete(pathImagen);
+                                    }
+
                                     if( !String.IsNullOrEmpty(st.Trim()) ) // imagen inline
                                         cadena = "<inline-graphic xlink:href=\"" + nombreArchivo + "\"/>";
                                     else
                                     {
+
+                                        String attrib = null;
+                                        if (parrafoSiguiente != null)
+                                        {
+                                            if ((alineacion(parrafoSiguiente, "wdAlignParagraphCenter") || alineacion(parrafoSiguiente, "1")) && tamano(parrafoSiguiente,10) && !negrita(parrafoSiguiente))
+                                            {
+                                                attrib = texto(parrafoSiguiente);
+                                                reemplazos.Add("<p>" + attrib + "</p>", "");
+                                            }
+                                        }
+                                                                              
+
                                         String label = "Figura ESCRIBA No. FIGURA", titulo = "ESCRIBA TITULO";
-                                        String nombreSinExtension = nombreArchivo.Substring(0, nombreArchivo.LastIndexOf("."));
                                         if ( !String.IsNullOrEmpty(descipcionImagen)) // se encontro descripcion para la imagen, se asume que no es formula
                                         {
                                             if (descipcionImagen.Contains(":"))
                                             {
                                                 descipcionImagen = descipcionImagen.Replace("<bold>", "").Replace("</bold>", "");
                                                 label = descipcionImagen.Substring(0, descipcionImagen.IndexOf(":"));
+                                                reemplazos.Add("(" + label.Trim().ToLower() + ")", "(<xref ref-type=\"fig\" rid=\"f" + extraeNumero(label) + "\">" + label.Trim().ToLower() + "</xref>)");
                                                 titulo = descipcionImagen.Substring(descipcionImagen.IndexOf(":") + 1);
                                             }
-                                            cadena = "\n<fig id=\"f" + nombreSinExtension + "\">";
+                                            cadena = "\n<fig id=\"f" + extraeNumero(label) + "\">";
                                             cadena += "\n<label>" + label + "</label>";
                                             cadena += "\n<caption><title>" + titulo + "</title></caption>";
                                             cadena += "\n<graphic xlink:href=\"" + nombreArchivo + "\"/>";
+                                            if (!String.IsNullOrEmpty(attrib))
+                                                cadena += "<attrib>"+attrib+"</attrib>";
                                             cadena += "\n</fig>";
                                             descipcionImagen = null;
                                         }
                                         else
                                         {
                                             cadena = "<!-- ELIJA SI LA IMAGEN ES FORMULA O GRAPHIC -->";
-                                            cadena += "\n<disp-formula id=\"e" + nombreSinExtension + "\">";
+                                            cadena += "\n<disp-formula id=\"e" + extraeNumero(label) + "\">";
                                             cadena += "\n<graphic xlink:href=\"" + nombreArchivo + "\"/>";
                                             cadena += "\n</disp-formula>";
                                         }
@@ -967,7 +1035,7 @@ namespace convertidor
 
         }
 
-        public String formateaTexto(Microsoft.Office.Interop.Word.Paragraph parrafo, Articulo articulo, String rutaGuardar)
+        public String formateaTexto(Microsoft.Office.Interop.Word.Paragraph parrafo, Articulo articulo, String rutaGuardar, Microsoft.Office.Interop.Word.Paragraph parrafoSiguiente)
         {
             if (parrafo == null || parrafo.Range == null || String.IsNullOrEmpty(parrafo.Range.Text))
                 return "";
@@ -977,7 +1045,7 @@ namespace convertidor
                     || parrafo.Range.Text.Trim().Equals("\r\a"))
                 return "";
 
-            return formateaTexto(parrafo.Range, articulo, rutaGuardar);
+            return formateaTexto(parrafo.Range, articulo, rutaGuardar, parrafoSiguiente);
             
         }
 
@@ -1032,6 +1100,7 @@ namespace convertidor
             return parrafo.Alignment.ToString();
                 
         }
+
 
         public String texto(Microsoft.Office.Interop.Word.Paragraph parrafo)
         {
@@ -1318,27 +1387,96 @@ namespace convertidor
                             XmlElement date = xml.CreateElement("date");
                             history.AppendChild(date);
                             date.SetAttribute("date-type", "accepted");
-                            XmlElement year = xml.CreateElement("year");
-                            date.AppendChild(year);
-                            year.InnerText = articulo.Fechaaceptado;
+
+                            if (articulo.Fechaaceptado.Length > 4 && articulo.Fechaaceptado.Contains("-"))
+                            {
+                                String dia = articulo.Fechaaceptado.Substring(0, articulo.Fechaaceptado.IndexOf("-"));
+                                articulo.Fechaaceptado = articulo.Fechaaceptado.Substring(articulo.Fechaaceptado.IndexOf("-") + 1);
+                                String mes = articulo.Fechaaceptado.Substring(0, articulo.Fechaaceptado.IndexOf("-"));
+                                articulo.Fechaaceptado = articulo.Fechaaceptado.Substring(articulo.Fechaaceptado.IndexOf("-") + 1);
+                                String ano = articulo.Fechaaceptado;
+
+                                XmlElement year = xml.CreateElement("year");
+                                XmlElement month = xml.CreateElement("month");
+                                XmlElement day = xml.CreateElement("day");
+                                date.AppendChild(year);
+                                date.AppendChild(month);
+                                date.AppendChild(day);
+                                year.InnerText = ano;
+                                month.InnerText = mes;
+                                day.InnerText = dia;
+                            }
+                            else
+                            {
+                                XmlElement year = xml.CreateElement("year");
+                                date.AppendChild(year);
+                                year.InnerText = articulo.Fechaaceptado;
+                            }
+                            
                         }
                         if (!String.IsNullOrEmpty(articulo.Fecharecibido))
                         {
+
                             XmlElement date = xml.CreateElement("date");
                             history.AppendChild(date);
                             date.SetAttribute("date-type", "received");
-                            XmlElement year = xml.CreateElement("year");
-                            date.AppendChild(year);
-                            year.InnerText = articulo.Fecharecibido;
+
+                            if (articulo.Fecharecibido.Length > 4 && articulo.Fecharecibido.Contains("-"))
+                            {
+                                String dia = articulo.Fecharecibido.Substring(0, articulo.Fecharecibido.IndexOf("-"));
+                                articulo.Fecharecibido = articulo.Fecharecibido.Substring(articulo.Fecharecibido.IndexOf("-") + 1);
+                                String mes = articulo.Fecharecibido.Substring(0, articulo.Fecharecibido.IndexOf("-"));
+                                articulo.Fecharecibido = articulo.Fecharecibido.Substring(articulo.Fecharecibido.IndexOf("-") + 1);
+                                String ano = articulo.Fecharecibido;
+
+                                XmlElement year = xml.CreateElement("year");
+                                XmlElement month = xml.CreateElement("month");
+                                XmlElement day = xml.CreateElement("day");
+                                date.AppendChild(year);
+                                date.AppendChild(month);
+                                date.AppendChild(day);
+                                year.InnerText = ano;
+                                month.InnerText = mes;
+                                day.InnerText = dia;
+                            }
+                            else
+                            {
+
+                                XmlElement year = xml.CreateElement("year");
+                                date.AppendChild(year);
+                                year.InnerText = articulo.Fecharecibido;
+                            }
                         }
                         if (!String.IsNullOrEmpty(articulo.Fecharevisado))
                         {
                             XmlElement date = xml.CreateElement("date");
                             history.AppendChild(date);
                             date.SetAttribute("date-type", "rev-recd");
-                            XmlElement year = xml.CreateElement("year");
-                            date.AppendChild(year);
-                            year.InnerText = articulo.Fecharevisado;
+
+                            if (articulo.Fecharevisado.Length > 4 && articulo.Fecharevisado.Contains("-"))
+                            {
+                                String dia = articulo.Fecharevisado.Substring(0, articulo.Fecharevisado.IndexOf("-"));
+                                articulo.Fecharevisado = articulo.Fecharevisado.Substring(articulo.Fecharevisado.IndexOf("-") + 1);
+                                String mes = articulo.Fecharevisado.Substring(0, articulo.Fecharevisado.IndexOf("-"));
+                                articulo.Fecharevisado = articulo.Fecharevisado.Substring(articulo.Fecharevisado.IndexOf("-") + 1);
+                                String ano = articulo.Fecharevisado;
+
+                                XmlElement year = xml.CreateElement("year");
+                                XmlElement month = xml.CreateElement("month");
+                                XmlElement day = xml.CreateElement("day");
+                                date.AppendChild(year);
+                                date.AppendChild(month);
+                                date.AppendChild(day);
+                                year.InnerText = ano;
+                                month.InnerText = mes;
+                                day.InnerText = dia;
+                            }
+                            else
+                            {
+                                XmlElement year = xml.CreateElement("year");
+                                date.AppendChild(year);
+                                year.InnerText = articulo.Fecharevisado;
+                            }
                         }
                     }
                     
@@ -1580,13 +1718,14 @@ namespace convertidor
                                 XmlElement fn = xml.CreateElement("fn");
                                 fngroup.AppendChild(fn);
                                 fn.SetAttribute("fn-type","other");
+                                fn.SetAttribute("id", "fn" + (i + 1));
 
                                 XmlElement label = xml.CreateElement("label");
                                 XmlElement p = xml.CreateElement("p");
                                 fn.AppendChild(label);
                                 fn.AppendChild(p);
 
-                                label.InnerText = "fn"+(i + 1);
+                                label.InnerText = ""+(i + 1);
 
                                 if (!string.IsNullOrEmpty(r.Match(articulo.notas[i]).Value))
                                 {
@@ -1614,8 +1753,13 @@ namespace convertidor
                         
                         //de tablas
                         fileContents = fileContents.Replace("&lt;", "<").Replace("&gt;", ">");
+                        fileContents = fileContents.Replace("<bold> QUOTE </bold>", "").Replace("QUOTE", "");
                         fileContents = fileContents.Replace("<p><list-item>", "<list-item>").Replace("<p><list list-type", "<list list-type")
                             .Replace("</list-item></p>", "</list-item>").Replace("<p></list>", "</list><p>");
+
+                        foreach (KeyValuePair<string, string> r in reemplazos)
+                            fileContents = fileContents.Replace(r.Key, r.Value);
+
                         System.IO.File.WriteAllText(temp, fileContents);
                     }
                     catch (Exception e)
@@ -1657,6 +1801,16 @@ namespace convertidor
             }
             return null;
 
+        }
+
+        private String extraeFecha(String cadena)
+        {
+            if (String.IsNullOrEmpty(cadena))
+                return null;
+
+            Regex rgx = new Regex(@"\d{2}-\d{2}-\d{4}");
+            Match mat = rgx.Match(cadena);
+            return mat.ToString();
         }
 
         public string extraeNumero(string original)
