@@ -66,17 +66,11 @@ namespace convertidor
 
                 if (validoXML)
                 {
-                    new BaseDatos().log("Iniciando conversión a" + formato + " de " + url + archivo, GetUserIP(), cliente);
                     convierte(cliente, archivo, url, formato);
                 }
 
             }
-            else
-            {
-                new BaseDatos().log("Conversión a " + formato + " rechazada: " + url + archivo, GetUserIP(), cliente);
-            }
-
-
+            
         }
 
 
