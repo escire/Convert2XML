@@ -11,6 +11,9 @@ namespace convertidor
         public int numPaginas { get; set; }
         public int numTablas { get; set; }
         public int numImagenes { get; set; }
+
+        public int numFormulas { get; set; }
+
         public String Doi { get; set; }
         private List<Autor> autores = new List<Autor>();
         public String Seccion { get; set; }

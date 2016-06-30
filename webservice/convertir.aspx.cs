@@ -39,8 +39,6 @@ namespace convertidor
             string archivo = Request.QueryString["archivo"];
             string url = Request.QueryString["url"];
             string formato = Request.QueryString["formato"];
-			
-			cliente = clave = "generico";
 
             
 
@@ -53,7 +51,11 @@ namespace convertidor
             parametrosXML.Add("printIssn", Request.QueryString["printIssn"]);
             parametrosXML.Add("abbreviation", Request.QueryString["abbreviation"]);
             parametrosXML.Add("publisher", Request.QueryString["publisher"]);
-            //parametrosXML.Add("",     Request.QueryString[""]);
+            parametrosXML.Add("date", Request.QueryString["date"]);
+            parametrosXML.Add("volume", Request.QueryString["volume"]);
+            parametrosXML.Add("issue", Request.QueryString["issue"]);
+            parametrosXML.Add("year", Request.QueryString["year"]);
+            
 
             bool valido = validar(cliente, clave, archivo, url, formato);
 
@@ -70,7 +72,8 @@ namespace convertidor
                 }
 
             }
-            
+
+
         }
 
 
@@ -81,7 +84,7 @@ namespace convertidor
             string urlcomp = url + archivo;
             string archivoSinCar = RemoveSpecialCharacters(archivo);
             string carpetaArchivo = Path.GetFileNameWithoutExtension(archivoSinCar);
-            string ruta = rutaTemporal + cliente + "\\" + carpetaArchivo + "\\";
+            string ruta = rutaTemporal + cliente + @"\" + carpetaArchivo + @"\";
             String archivoFinal = ruta + archivoSinCar;
             Uri uri = new Uri(urlcomp);
             
@@ -171,6 +174,12 @@ namespace convertidor
                 {
                     res.Add("mensaje", pd.Mensaje);
                 }
+            }
+            else if (formato.Equals("epub"))
+            {
+                Spire.Doc.Document documento = new Spire.Doc.Document();
+                documento.LoadFromFile(rutaArchivo.ToString());
+                documento.SaveToFile(rutaArchivoConver.ToString(), Spire.Doc.FileFormat.EPub);
             }
             else
             {
@@ -264,7 +273,7 @@ namespace convertidor
                 return false;
             }
 
-            
+
             if (string.IsNullOrEmpty(archivo))
             {
                 mensaje.Add("estatus", "error");

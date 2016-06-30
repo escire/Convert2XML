@@ -95,6 +95,7 @@ namespace convertidor
                     var numberOfPages = doc.ComputeStatistics(WdStatistic.wdStatisticPages, false);
                     articulo.numPaginas = numberOfPages;
                     articulo.numImagenes = 0;
+                    articulo.numFormulas = 0;
                     articulo.numTablas = doc.Tables.Count;
                     int j = 1; 
                     //buscar DOI
@@ -251,6 +252,7 @@ namespace convertidor
                             foreach (Match emailMatch in emailMatches)
                             {
                                 articulo.Autorcorres = emailMatch.Value;
+                                articulo.AutorcorresNombre = autorcorres;
                                 log += "*****Autorcorres: " + articulo.Autorcorres + "<br/>";
                             }
 
@@ -399,39 +401,41 @@ namespace convertidor
                         if (!negrita(doc.Paragraphs[i]) && !cursiva(doc.Paragraphs[i]) && alineacion(doc.Paragraphs[i], "wdAlignParagraphLeft")
                             && tipoletra(doc.Paragraphs[i], "Times New Roman") && tamano(doc.Paragraphs[i], 12)
                             && (
-                                texto(doc.Paragraphs[i]).ToLower().Contains("received") 
-                                || texto(doc.Paragraphs[i]).ToLower().Contains("recibido")
-                                || texto(doc.Paragraphs[i]).ToLower().Contains("recepción")
+                                texto(doc.Paragraphs[i]).ToLower().Contains("received:") 
+                                || texto(doc.Paragraphs[i]).ToLower().Contains("recibido:")
+                                || texto(doc.Paragraphs[i]).ToLower().Contains("recepción:")
                                 ))
                         {
                             String fechare = extraeFecha(texto(doc.Paragraphs[i]));
                             if (String.IsNullOrEmpty(fechare))
                                 fechare = extreaAnio( texto(doc.Paragraphs[i]) );
                             articulo.Fecharecibido = fechare;
+                            
                             log += "<br/>*****fecha received: " + fechare + "<br/>";
                             j = i;
                         }
                         else if (!negrita(doc.Paragraphs[i]) && !cursiva(doc.Paragraphs[i]) && alineacion(doc.Paragraphs[i], "wdAlignParagraphLeft")
                             && tipoletra(doc.Paragraphs[i], "Times New Roman") && tamano(doc.Paragraphs[i], 12)
                             && (
-                                texto(doc.Paragraphs[i]).ToLower().Contains("revisado") 
-                                || texto(doc.Paragraphs[i]).ToLower().Contains("reviewed")
-                            || texto(doc.Paragraphs[i]).ToLower().Contains("reviewed")
+                                texto(doc.Paragraphs[i]).ToLower().Contains("revisado:") 
+                                || texto(doc.Paragraphs[i]).ToLower().Contains("reviewed:")
+                            || texto(doc.Paragraphs[i]).ToLower().Contains("reviewed:")
                             ))
                         {
                             String fechare = extraeFecha(texto(doc.Paragraphs[i]));
                             if (String.IsNullOrEmpty(fechare))
                                 fechare = extreaAnio( texto(doc.Paragraphs[i]) );
                             articulo.Fecharevisado = fechare;
+                            
                             log += "<br/>*****fecha reviewed: " + fechare + "<br/>";
                             j = i;
                         }
                         else if (!negrita(doc.Paragraphs[i]) && !cursiva(doc.Paragraphs[i]) && alineacion(doc.Paragraphs[i], "wdAlignParagraphLeft")
                                 && tipoletra(doc.Paragraphs[i], "Times New Roman") && tamano(doc.Paragraphs[i], 12)
                                 && (
-                                        texto(doc.Paragraphs[i]).ToLower().Contains("aceptado") 
-                                        || texto(doc.Paragraphs[i]).ToLower().Contains("accepted")
-                                        || texto(doc.Paragraphs[i]).ToLower().Contains("aceptación")
+                                        texto(doc.Paragraphs[i]).ToLower().Contains("aceptado:") 
+                                        || texto(doc.Paragraphs[i]).ToLower().Contains("accepted:")
+                                        || texto(doc.Paragraphs[i]).ToLower().Contains("aceptación:")
                                 ))
                         {
                             String fechare = extraeFecha(texto(doc.Paragraphs[i]));
@@ -906,45 +910,52 @@ namespace convertidor
                                         File.Delete(pathImagen);
                                     }
 
-                                    if( !String.IsNullOrEmpty(st.Trim()) ) // imagen inline
+                                    if (!String.IsNullOrEmpty(st.Trim()))
+                                    { // imagen inline
                                         cadena = "<inline-graphic xlink:href=\"" + nombreArchivo + "\"/>";
+                                        articulo.numImagenes += 1;
+                                    }
                                     else
                                     {
 
                                         String attrib = null;
                                         if (parrafoSiguiente != null)
                                         {
-                                            if ((alineacion(parrafoSiguiente, "wdAlignParagraphCenter") || alineacion(parrafoSiguiente, "1")) && tamano(parrafoSiguiente,10) && !negrita(parrafoSiguiente))
+                                            if ((alineacion(parrafoSiguiente, "wdAlignParagraphCenter") || alineacion(parrafoSiguiente, "1")) && tamano(parrafoSiguiente, 10) && !negrita(parrafoSiguiente))
                                             {
                                                 attrib = texto(parrafoSiguiente);
                                                 reemplazos.Add("<p>" + attrib + "</p>", "");
                                             }
                                         }
-                                                                              
+
 
                                         String label = "Figura ESCRIBA No. FIGURA", titulo = "ESCRIBA TITULO";
-                                        if ( !String.IsNullOrEmpty(descipcionImagen)) // se encontro descripcion para la imagen, se asume que no es formula
+                                        if (!String.IsNullOrEmpty(descipcionImagen)) // se encontro descripcion para la imagen, se asume que no es formula
                                         {
+                                            articulo.numImagenes += 1;
                                             if (descipcionImagen.Contains(":"))
                                             {
                                                 descipcionImagen = descipcionImagen.Replace("<bold>", "").Replace("</bold>", "");
                                                 label = descipcionImagen.Substring(0, descipcionImagen.IndexOf(":"));
-                                                reemplazos.Add("(" + label.Trim().ToLower() + ")", "(<xref ref-type=\"fig\" rid=\"f" + extraeNumero(label) + "\">" + label.Trim().ToLower() + "</xref>)");
+                                                //reemplazos.Add("(" + label.Trim().ToLower() + ")", "(<xref ref-type=\"fig\" rid=\"f" + extraeNumero(label) + "\">" + label.Trim().ToLower() + "</xref>)");
+                                                reemplazos.Add("(" + label.Trim().ToLower() + ")", "(<xref ref-type=\"fig\" rid=\"f" + articulo.numImagenes + "\">" + label.Trim().ToLower() + "</xref>)");
                                                 titulo = descipcionImagen.Substring(descipcionImagen.IndexOf(":") + 1);
                                             }
-                                            cadena = "\n<fig id=\"f" + extraeNumero(label) + "\">";
+                                            //cadena = "\n<fig id=\"f" + extraeNumero(label) + "\">";
+                                            cadena = "\n<fig id=\"f" + articulo.numImagenes + "\">";
                                             cadena += "\n<label>" + label + "</label>";
                                             cadena += "\n<caption><title>" + titulo + "</title></caption>";
                                             cadena += "\n<graphic xlink:href=\"" + nombreArchivo + "\"/>";
                                             if (!String.IsNullOrEmpty(attrib))
-                                                cadena += "<attrib>"+attrib+"</attrib>";
+                                                cadena += "<attrib>" + attrib + "</attrib>";
                                             cadena += "\n</fig>";
                                             descipcionImagen = null;
                                         }
                                         else
                                         {
+                                            articulo.numFormulas += 1;
                                             cadena = "<!-- ELIJA SI LA IMAGEN ES FORMULA O GRAPHIC -->";
-                                            cadena += "\n<disp-formula id=\"e" + extraeNumero(label) + "\">";
+                                            cadena += "\n<disp-formula id=\"e" + extraeNumero(label) + "" + articulo.numFormulas + "\">";
                                             cadena += "\n<graphic xlink:href=\"" + nombreArchivo + "\"/>";
                                             cadena += "\n</disp-formula>";
                                         }
@@ -1234,16 +1245,7 @@ namespace convertidor
                     XmlElement articlemeta = xml.CreateElement("article-meta");
                     front.AppendChild(articlemeta);
 
-                    XmlElement permissions = xml.CreateElement("permissions");
-                    articlemeta.AppendChild(permissions);
-                    XmlElement license = xml.CreateElement("license");
-                    permissions.AppendChild(license);
-                    license.SetAttribute("license-type", "open-access");
-                    license.SetAttribute("xlink:href", "http://creativecommons.org/licenses/by-nc-nd/4.0/deed.es");
-                    XmlElement licensep = xml.CreateElement("license-p");
-                    license.AppendChild(licensep);
-                    licensep.InnerText = "Este es un artículo publicado en acceso abierto bajo una licencia Creative Commons";
-
+                    //Article Identifier, zero or more
                     if (!String.IsNullOrEmpty(articulo.Doi))
                     {
                         XmlElement articleid = xml.CreateElement("article-id");
@@ -1254,38 +1256,16 @@ namespace convertidor
                     else
                     {
                         XmlComment comentario = xml.CreateComment("No se encontro DOI en documento Word, debe agregarlo manualmente");
-                        articlemeta.AppendChild(comentario);    
+                        articlemeta.AppendChild(comentario);
                     }
 
-                    XmlElement fpage = xml.CreateElement("fpage");
-                    articlemeta.AppendChild(fpage);
-                    fpage.InnerText = 1 + "";
-
-                    XmlElement lpage = xml.CreateElement("lpage");
-                    articlemeta.AppendChild(lpage);
-                    lpage.InnerText = (articulo.numPaginas + 1) + "";
-
-                    XmlComment c1 = xml.CreateComment("Verificar valor de fpage y lpage");
-                    articlemeta.AppendChild(c1);
-
-                    XmlElement volume = xml.CreateElement("volume");
-                    articlemeta.AppendChild(volume);
-                    volume.InnerText = "0";
-
-                    XmlElement issue = xml.CreateElement("issue");
-                    articlemeta.AppendChild(issue);
-                    issue.InnerText = "0";
-
-                    XmlComment insertaVolume = xml.CreateComment("Insertar Volumen y Número");
-                    articlemeta.AppendChild(insertaVolume);
-
-
+                    //Article Grouping Data, zero or one
                     XmlElement articlecategories = xml.CreateElement("article-categories");
                     articlemeta.AppendChild(articlecategories);
                     XmlElement subjgroup = xml.CreateElement("subj-group");
                     articlecategories.AppendChild(subjgroup);
-                    subjgroup.SetAttribute("subj-group-type","heading");
-                    
+                    subjgroup.SetAttribute("subj-group-type", "heading");
+
                     /*
                     foreach(String tempSec in articulo.secciones ){
                         XmlElement subject = xml.CreateElement("subject");
@@ -1296,8 +1276,8 @@ namespace convertidor
                     XmlElement subject = xml.CreateElement("subject");
                     subjgroup.AppendChild(subject);
                     subject.InnerText = articulo.Seccion;
-                    
-                    
+
+                    //Title Group, zero or one
                     XmlElement titlegroup = xml.CreateElement("title-group");
                     articlemeta.AppendChild(titlegroup);
                     XmlElement articletitle = xml.CreateElement("article-title");
@@ -1315,9 +1295,14 @@ namespace convertidor
                         transtitlegroup.AppendChild(transtitle);
                         transtitle.InnerText = articulo.Title;
                     }
-                    
-                    
 
+                    /*  Any combination of:
+                        <contrib-group> Contributor Group
+                        <aff> Affiliation
+                        <aff-alternatives> Affiliation Alternatives
+                        <x> X - Generated Text and Punctuation
+                        <author-notes> Author Note Group, zero or one 
+                     */
                     //Autores
                     XmlElement contribgroup = xml.CreateElement("contrib-group");
                     articlemeta.AppendChild(contribgroup);
@@ -1343,14 +1328,24 @@ namespace convertidor
                         {
                             XmlElement xref = xml.CreateElement("xref");
                             contrib.AppendChild(xref);
-                            xref.SetAttribute("ref-type","aff");
+                            xref.SetAttribute("ref-type", "aff");
                             xref.SetAttribute("rid", "aff" + aut.Afiliacion);
-                            xref.InnerText = contador+"";
+                            xref.InnerText = contador + "";
+                        }
+                        if (!String.IsNullOrEmpty(articulo.Autorcorres) && !String.IsNullOrEmpty(articulo.AutorcorresNombre) && articulo.AutorcorresNombre.Contains(aut.FirstName) && articulo.AutorcorresNombre.Contains(aut.SurName))
+                        {
+
+                            XmlElement xref = xml.CreateElement("xref");
+                            contrib.AppendChild(xref);
+                            xref.SetAttribute("ref-type", "corresp");
+                            xref.SetAttribute("rid", "c01");
+                            xref.InnerText = "<sup>*</sup>";
                         }
                         contador += 1;
 
                     }
-                    foreach( Afiliacion af in  articulo.Afiliaciones ){
+                    foreach (Afiliacion af in articulo.Afiliaciones)
+                    {
                         XmlElement aff = xml.CreateElement("aff");
                         contribgroup.AppendChild(aff);
                         aff.SetAttribute("id", "aff" + af.Id);
@@ -1366,22 +1361,85 @@ namespace convertidor
                         institution.InnerText = af.Original.Replace(af.Id, " ");
                     }
 
-                    if ( !String.IsNullOrEmpty(articulo.Autorcorres))
+                    if (!String.IsNullOrEmpty(articulo.Autorcorres))
                     {
                         XmlElement authornotes = xml.CreateElement("author-notes");
                         articlemeta.AppendChild(authornotes);
                         XmlElement corresp = xml.CreateElement("corresp");
                         authornotes.AppendChild(corresp);
                         corresp.SetAttribute("id", "c01");
-                        corresp.InnerText = articulo.AutorcorresNombre + " . E-mail:";
+                        corresp.InnerText = "E-mail: ";
                         XmlElement email = xml.CreateElement("email");
                         corresp.AppendChild(email);
                         email.InnerText = articulo.Autorcorres;
                     }
+
+                    //<pub-date> Publication Date, zero or more, el validador me obliga a ponerlo
+                    if (!String.IsNullOrEmpty(parametrosXML["date"]))
+                    {
+                        String date = parametrosXML["date"]+"";
+                        XmlElement pubdate = xml.CreateElement("pub-date");
+                        pubdate.SetAttribute("pub-type", "epub-ppub");
+                        articlemeta.AppendChild(pubdate);
+                        if (date.Length >= 9)
+                        {
+                            XmlElement day = xml.CreateElement("day");
+                            pubdate.AppendChild(day);
+                            day.InnerText = date.Substring(8, 2);
+                        }
+                        //month
+                        if (date.Length >= 7)
+                        {
+                            XmlElement month = xml.CreateElement("month");
+                            pubdate.AppendChild(month);
+                            month.InnerText = date.Substring(5, 2);
+                        }
+                        //year
+                        if (date.Length >= 4)
+                        {
+                            XmlElement year = xml.CreateElement("year");
+                            pubdate.AppendChild(year);
+                            year.InnerText = date.Substring(0, 4);
+                        }
+
+                        
+                    }
+
+                    // <volume> Volume Number, zero or one
+                    XmlElement volume = xml.CreateElement("volume");
+                    articlemeta.AppendChild(volume);
+                    if (!String.IsNullOrEmpty(parametrosXML["volume"]))
+                        volume.InnerText = parametrosXML["volume"]+"";
+                    else
+                        volume.InnerText = "0";
+
+                    //<issue> Issue Number, zero or more
+                    XmlElement issue = xml.CreateElement("issue");
+                    articlemeta.AppendChild(issue);
+                    if (!String.IsNullOrEmpty(parametrosXML["issue"]))
+                        issue.InnerText = parametrosXML["issue"]+"";
+                    else
+                        issue.InnerText = "0";
+                    XmlComment insertaVolume = xml.CreateComment("Insertar Volumen y Número");
+                    articlemeta.AppendChild(insertaVolume);
+
+                    // Optionally, the following sequence (in order): <fpage> First Page
+                    XmlElement fpage = xml.CreateElement("fpage");
+                    articlemeta.AppendChild(fpage);
+                    fpage.InnerText = 1 + "";
+
+                    // Optionally, the following sequence (in order): <lpage> Last Page, zero or one
+                    XmlElement lpage = xml.CreateElement("lpage");
+                    articlemeta.AppendChild(lpage);
+                    lpage.InnerText = (articulo.numPaginas + 1) + "";
+                    XmlComment c1 = xml.CreateComment("Verificar valor de fpage y lpage");
+                    articlemeta.AppendChild(c1);
+
+                    //<history> History: Document History, zero or one
                     if (!String.IsNullOrEmpty(articulo.Fechaaceptado) || !String.IsNullOrEmpty(articulo.Fecharecibido) || !String.IsNullOrEmpty(articulo.Fecharevisado))
                     {
                         XmlElement history = xml.CreateElement("history");
-                        articlemeta.AppendChild( history );
+                        articlemeta.AppendChild(history);
                         if (!String.IsNullOrEmpty(articulo.Fechaaceptado))
                         {
                             XmlElement date = xml.CreateElement("date");
@@ -1399,9 +1457,28 @@ namespace convertidor
                                 XmlElement year = xml.CreateElement("year");
                                 XmlElement month = xml.CreateElement("month");
                                 XmlElement day = xml.CreateElement("day");
-                                date.AppendChild(year);
-                                date.AppendChild(month);
                                 date.AppendChild(day);
+                                date.AppendChild(month);
+                                date.AppendChild(year);
+                                
+                                year.InnerText = ano;
+                                month.InnerText = mes;
+                                day.InnerText = dia;
+                            }
+                            else if (articulo.Fechaaceptado.Length > 4 && articulo.Fechaaceptado.Contains("/"))
+                            {
+                                String dia = articulo.Fechaaceptado.Substring(0, articulo.Fechaaceptado.IndexOf("/"));
+                                articulo.Fechaaceptado = articulo.Fechaaceptado.Substring(articulo.Fechaaceptado.IndexOf("/") + 1);
+                                String mes = articulo.Fechaaceptado.Substring(0, articulo.Fechaaceptado.IndexOf("/"));
+                                articulo.Fechaaceptado = articulo.Fechaaceptado.Substring(articulo.Fechaaceptado.IndexOf("/") + 1);
+                                String ano = articulo.Fechaaceptado;
+
+                                XmlElement year = xml.CreateElement("year");
+                                XmlElement month = xml.CreateElement("month");
+                                XmlElement day = xml.CreateElement("day");
+                                date.AppendChild(day);
+                                date.AppendChild(month);
+                                date.AppendChild(year);
                                 year.InnerText = ano;
                                 month.InnerText = mes;
                                 day.InnerText = dia;
@@ -1412,7 +1489,7 @@ namespace convertidor
                                 date.AppendChild(year);
                                 year.InnerText = articulo.Fechaaceptado;
                             }
-                            
+
                         }
                         if (!String.IsNullOrEmpty(articulo.Fecharecibido))
                         {
@@ -1428,13 +1505,35 @@ namespace convertidor
                                 String mes = articulo.Fecharecibido.Substring(0, articulo.Fecharecibido.IndexOf("-"));
                                 articulo.Fecharecibido = articulo.Fecharecibido.Substring(articulo.Fecharecibido.IndexOf("-") + 1);
                                 String ano = articulo.Fecharecibido;
+                                
+                                XmlElement day = xml.CreateElement("day");
+                                XmlElement month = xml.CreateElement("month");
+                                XmlElement year = xml.CreateElement("year");
+                                
+                                date.AppendChild(day);
+                                date.AppendChild(month);
+                                date.AppendChild(year);
+                                
+                                year.InnerText = ano;
+                                month.InnerText = mes;
+                                day.InnerText = dia;
+                            }
+                            else if (articulo.Fecharecibido.Length > 4 && articulo.Fecharecibido.Contains("/"))
+                            {
+                                String dia = articulo.Fecharecibido.Substring(0, articulo.Fecharecibido.IndexOf("/"));
+                                articulo.Fecharecibido = articulo.Fecharecibido.Substring(articulo.Fecharecibido.IndexOf("/") + 1);
+                                String mes = articulo.Fecharecibido.Substring(0, articulo.Fecharecibido.IndexOf("/"));
+                                articulo.Fecharecibido = articulo.Fecharecibido.Substring(articulo.Fecharecibido.IndexOf("/") + 1);
+                                String ano = articulo.Fecharecibido;
 
                                 XmlElement year = xml.CreateElement("year");
                                 XmlElement month = xml.CreateElement("month");
                                 XmlElement day = xml.CreateElement("day");
-                                date.AppendChild(year);
-                                date.AppendChild(month);
                                 date.AppendChild(day);
+                                date.AppendChild(month);
+                                date.AppendChild(year);
+                                
+                                
                                 year.InnerText = ano;
                                 month.InnerText = mes;
                                 day.InnerText = dia;
@@ -1464,9 +1563,31 @@ namespace convertidor
                                 XmlElement year = xml.CreateElement("year");
                                 XmlElement month = xml.CreateElement("month");
                                 XmlElement day = xml.CreateElement("day");
-                                date.AppendChild(year);
-                                date.AppendChild(month);
                                 date.AppendChild(day);
+                                date.AppendChild(month);
+                                date.AppendChild(year);
+                                
+                                
+                                year.InnerText = ano;
+                                month.InnerText = mes;
+                                day.InnerText = dia;
+                            }
+                            else if (articulo.Fecharevisado.Length > 4 && articulo.Fecharevisado.Contains("/"))
+                            {
+                                String dia = articulo.Fecharevisado.Substring(0, articulo.Fecharevisado.IndexOf("/"));
+                                articulo.Fecharevisado = articulo.Fecharevisado.Substring(articulo.Fecharevisado.IndexOf("/") + 1);
+                                String mes = articulo.Fecharevisado.Substring(0, articulo.Fecharevisado.IndexOf("/"));
+                                articulo.Fecharevisado = articulo.Fecharevisado.Substring(articulo.Fecharevisado.IndexOf("/") + 1);
+                                String ano = articulo.Fecharevisado;
+
+                                XmlElement year = xml.CreateElement("year");
+                                XmlElement month = xml.CreateElement("month");
+                                XmlElement day = xml.CreateElement("day");
+                                date.AppendChild(day);
+                                date.AppendChild(month);
+                                date.AppendChild(year);
+                                
+                                
                                 year.InnerText = ano;
                                 month.InnerText = mes;
                                 day.InnerText = dia;
@@ -1479,7 +1600,19 @@ namespace convertidor
                             }
                         }
                     }
-                    
+
+                    //<permissions> Permissions, zero or one
+                    XmlElement permissions = xml.CreateElement("permissions");
+                    articlemeta.AppendChild(permissions);
+                    XmlElement license = xml.CreateElement("license");
+                    permissions.AppendChild(license);
+                    license.SetAttribute("license-type", "open-access");
+                    license.SetAttribute("xlink:href", @"https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es");
+                    XmlElement licensep = xml.CreateElement("license-p");
+                    license.AppendChild(licensep);
+                    licensep.InnerText = "Este es un artículo publicado en acceso abierto bajo una licencia Creative Commons";
+
+                    //<abstract> Abstract, zero or more                    
                     if (!String.IsNullOrEmpty(articulo.Resumen))
                     {
                         XmlElement abstractt = xml.CreateElement("abstract");
@@ -1487,6 +1620,7 @@ namespace convertidor
                         abstractt.InnerText = articulo.Resumen;
                     }
 
+                    //<trans-abstract> Translated Abstract, zero or more
                     if (!String.IsNullOrEmpty(articulo.Abstractt))
                     {
                         XmlElement transabstract = xml.CreateElement("trans-abstract");
@@ -1495,6 +1629,7 @@ namespace convertidor
                         transabstract.InnerText = articulo.Abstractt;
                     }
 
+                    //<kwd-group> Keyword Group, zero or more
                     if (articulo.Palabrasclave.Count > 0)
                     {
                         XmlElement kwdgroup = xml.CreateElement("kwd-group");
@@ -1530,6 +1665,7 @@ namespace convertidor
                         }
                     }
 
+                    //<counts> Counts, zero or one
                     XmlElement counts = xml.CreateElement("counts");
                     articlemeta.AppendChild(counts);
 
@@ -1546,7 +1682,7 @@ namespace convertidor
 
                     XmlElement equationcount = xml.CreateElement("equation-count");
                     counts.AppendChild(equationcount);
-                    equationcount.SetAttribute("count", "0");
+                    equationcount.SetAttribute("count", articulo.numFormulas + "");
                     XmlComment c2 = xml.CreateComment("Verificar valor equation-count");
                     counts.AppendChild(c2);    
 
@@ -1618,9 +1754,6 @@ namespace convertidor
                         XmlElement back = xml.CreateElement("back");
                         article.AppendChild(back);
 
-                        XmlElement reflist = xml.CreateElement("ref-list");
-                        back.AppendChild(reflist);
-                        
                         //Agradecimientos
                         if (!String.IsNullOrEmpty(articulo.Agradecimientos))
                         {
@@ -1633,10 +1766,11 @@ namespace convertidor
 
                             XmlElement pA = xml.CreateElement("p");
                             ack.AppendChild(pA);
-                            pA.InnerText = articulo.Agradecimientos.Replace("||","  ");
+                            pA.InnerText = articulo.Agradecimientos.Replace("||","  ").Replace("<br/>","  ");
                         }
 
-
+                        XmlElement reflist = xml.CreateElement("ref-list");
+                        back.AppendChild(reflist);
                         //referencias bibliograficas
                         int totalREf = articulo.Referencias.Count;
 
@@ -1749,7 +1883,7 @@ namespace convertidor
                         //corregir un error de c#
                         var fileContents = System.IO.File.ReadAllText(temp);
                         fileContents = fileContents.Replace("<ext-link ext-link-type=\"uri\" href", "<ext-link ext-link-type=\"uri\" xlink:href");
-                        fileContents = fileContents.Replace("href=\"http://creativecommons.org/licenses/by-nc-nd/4.0/deed.es\"", "xlink:href=\"http://creativecommons.org/licenses/by-nc-nd/4.0/deed.es\"");
+                        fileContents = fileContents.Replace("href=\"https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es\"", "xlink:href=\"https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es\"");
                         
                         //de tablas
                         fileContents = fileContents.Replace("&lt;", "<").Replace("&gt;", ">");
@@ -1810,7 +1944,20 @@ namespace convertidor
 
             Regex rgx = new Regex(@"\d{2}-\d{2}-\d{4}");
             Match mat = rgx.Match(cadena);
-            return mat.ToString();
+            if( !String.IsNullOrEmpty(mat.ToString()) )
+                return mat.ToString();
+
+            rgx = new Regex(@"\d{2}/\d{2}/\d{4}");
+            mat = rgx.Match(cadena);
+            if (!String.IsNullOrEmpty(mat.ToString()))
+                return mat.ToString();
+
+            rgx = new Regex(@"\d{2}.\d{2}.\d{4}");
+            mat = rgx.Match(cadena);
+            if (!String.IsNullOrEmpty(mat.ToString()))
+                return mat.ToString();
+
+            return null;
         }
 
         public string extraeNumero(string original)
