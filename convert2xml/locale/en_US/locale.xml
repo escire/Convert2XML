@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE locale SYSTEM "../../../../../lib/pkp/dtd/locale.dtd">
+
+ 
+ 
+<locale name="en_US" full_name="U.S. English">
+	<message key="plugins.generic.convert2xmlPlugin.description">Converter based on JATS standard and integrated at Open Journal Systems (OJS)</message>
+	<message key="plugins.generic.convert2xmlPlugin.name">Convert2XML</message>
+	<message key="plugins.generic.convert2xmlPlugin.href">File Convert...</message>
+	
+	<message key="plugins.generic.convert2xml.description">Converter based on JATS standard and integrated at Open Journal Systems (OJS)</message>
+	<message key="plugins.generic.convert2xmlPlugin.settings">Settings</message>
+	<message key="plugins.generic.convert2xmlPlugin.displayname">Convert2XML</message>
+	<message key="plugins.generic.convert2xml.settings">Settings</message>
+	<message key="plugins.generic.convert2xml.settings.wsURL">Service URL</message>
+	<message key="plugins.generic.convert2xml.settings.wsURLToolTip">Demo: http://converter.escire.mx/jats.aspx?</message>
+	<message key="plugins.generic.convert2xml.settings.wsURLRequired">Service URL required</message>
+	<message key="plugins.generic.convert2xml.leyenda">XML converter prepared by eScire</message>
+	<message key="plugins.generic.convert2xml.requerimientos">Requirements</message>
+	<message key="plugins.generic.convert2xml.requerimientosVer">View Requirements</message>
+	<message key="plugins.generic.convert2xml.requerimientos1">Journal Title</message>
+	<message key="plugins.generic.convert2xml.requerimientos2">Journal Abbreviation</message>
+	<message key="plugins.generic.convert2xml.requerimientos3">Printed ISSN</message>
+	<message key="plugins.generic.convert2xml.requerimientos4">Publisher/Journal Institution</message>
+	<message key="plugins.generic.convert2xml.requerimientos5">Number to each article to convert (volume, number and year)</message>
+	<message key="plugins.generic.convert2xml.requerimientos6">Pages to each article to convert</message>
+	<message key="plugins.generic.convert2xml.requerimientos7">Date issued of each article to be converted</message>
+	<message key="plugins.generic.convert2xml.requerimientos.header1">Status</message>
+	<message key="plugins.generic.convert2xml.requerimientos.header2">Requeriments</message>
+	<message key="plugins.generic.convert2xml.requerimientos.header3">Suggestion</message>
+	<message key="plugins.generic.convert2xml.requerimientos.statusOk">Configured</message>
+	<message key="plugins.generic.convert2xml.requerimientos.statusBad">Not Configured</message>
+	<message key="plugins.generic.convert2xml.requerimientos.paso1">Configuration. Step 1 - Details</message>
+	
+</locale>
