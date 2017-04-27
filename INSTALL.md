@@ -13,7 +13,7 @@
 - Windows Server
 - Microsoft Office 2013 (Word)
 - IIS Express
-- XML Processing for the .NET Framework
+- XmlPrime for the .NET Framework
 - Java SE Development Kit 8
 
 #### Installation
@@ -42,7 +42,7 @@
 - Windows Server
 - Microsoft Office 2013 (Word)
 - IIS Express
-- XML Processing for the .NET Framework
+- XmlPrime for the .NET Framework
 - Java SE Development Kit 8
 
 #### Instalación
