@@ -73,11 +73,10 @@ ESTE SOFTWARE SE PROPORCIONA "TAL CUAL" POR LOS CREADORES Y CONTRIBUIDORES, SIN 
 
 ### Prueba
 
-http://ojs.escire.net/demo/index.php/escire<br />
+http://ojs.escire.net/demo248/index.php/escire<br />
 usuario: demo<br />
 contraseña: convert2xml
 
-![DemoEsp](http://escire.net/convert2xml/demo_espanol.jpg)
 
 ### Instalación
 
