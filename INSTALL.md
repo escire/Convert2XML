@@ -13,28 +13,23 @@
 - Windows Server
 - Microsoft Office 2013 (Word)
 - IIS Express
-- Visual Studio 2013
+- XML Processing for the .NET Framework
+- Java SE Development Kit 8
 
 #### Installation
 
-1. Download all files inside folder "webservice".
-2. Create a deployment package on the source computer by using Visual Studio 2013.
-3. In IIS, create a new entry in the file "config\applicationhost.config" in "sites".
-4. Start IIS.
+1. Download and unzip the file "convertidor.zip".
+2. In IIS, create a new entry in the file "config\applicationhost.config" in "sites".
+3. Start IIS.
 
 ### Plugin
 
-1. Download all files inside folder "plugin_ojs", compress them and name the file: converter.tar.gz.
+1. Download the file: convert2xml.tar.gz.
 2. Log into your OJS installation as manager.
 3. Go to "System modules".
 4. Go to "Install a new module".
-5. Install the file converter.tar.gz.
-6. Within generic modules, go to the module configuration and write the data: user, password and URL of the webservice. If you want you can register in http://converter.escire.mx/admin/Registro.aspx to use our webservice for 30 days for free.
-7. When installing the converter will create a user with editor permissions, do not edit the user, edit the user data in the ConverterPlugin.inc.php this file.
-8. Add the hook to call in the file: "[OJS]/templates/sectionEditor/submissionEditing.tpl". Edit the file by adding the following line:<br />
-{call_hook name="Converter"}<br />
-it should be placed just before the line:<br />
-{include file="sectionEditor/submission/layout.tpl"}
+5. Install the file convert2xml.tar.gz.
+6. Within generic modules, go to the module configuration and write the data: URL of the webservice. 
 
 ## Español
 \([View in english](#english)\)
@@ -47,25 +42,20 @@ it should be placed just before the line:<br />
 - Windows Server
 - Microsoft Office 2013 (Word)
 - IIS Express
-- Visual Studio 2013
+- XML Processing for the .NET Framework
+- Java SE Development Kit 8
 
 #### Instalación
 
-1. Descargar los archivos de la carpeta "webservice".
-2. Crear un paquete de implementación en el equipo de origen utilizando Visual Studio 2013.
-3. En IIS, crear una nueva entrada en el archivo "config\applicationhost.config" dentro de "sites".
-4. Iniciar IIS.
+1. Descargar y descomprimir el archivo "convertidor.zip".
+2. En IIS, crear una nueva entrada en el archivo "config\applicationhost.config" dentro de "sites".
+3. Iniciar IIS.
 
 ### Plugin
 
-1. Descarga los archivos de la carpeta "plugin_ojs", comprímelos y nombra al archivo: converter.tar.gz.
+1. Descarga el archivo convert2xml.tar.gz.
 2. Ingresa a tu instalación de OJS como gestor.
 3. Entra a "Módulos del Sistema".
 4. Entra a "Instalar un nuevo módulo".
-5. Instala el archivo converter.tar.gz.
-6. Dentro de módulos genéricos, ve a la configuración del módulo y escribe los datos: usuario, contraseña y url del servicio web. Si lo deseas puedes regístrate en http://converter.escire.mx/admin/Registro.aspx para probar nuestro servicio web por 30 días gratis.
-7. Al momento de instalar el convertidor se va a crear un usuario con permisos de editor, no edite el usuario, edite los datos de este usuario en el archivo ConverterPlugin.inc.php.
-8. Agregue el hook de llamado en el archivo: "[OJS]/templates/sectionEditor/submissionEditing.tpl". Edite el archivo agregando la siguiente línea:<br />
-{call_hook name="Converter"}<br />
-deberá colocarla justo antes la línea:<br />
-{include file="sectionEditor/submission/layout.tpl"}
+5. Instala el archivo convert2xml.tar.gz..
+6. Dentro de módulos genéricos, ve a la configuración del módulo y escribe los datos: url del servicio web. 
