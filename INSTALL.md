@@ -11,6 +11,7 @@
 
 #### Requirements
 - Windows Server
+- Microsoft .NET Framework 4.6.2
 - Microsoft Office 2013 (Word)
 - IIS Express
 - XmlPrime for the .NET Framework
@@ -40,8 +41,9 @@
 
 #### Requerimientos
 - Windows Server
+- Microsoft .NET Framework 4.6.2
 - Microsoft Office 2013 (Word)
-- IIS Express
+- IIS Express 
 - XmlPrime for the .NET Framework
 - Java SE Development Kit 8
 
