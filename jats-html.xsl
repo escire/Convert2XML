@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mml="http://www.w3.org/1998/Math/MathML" version="1.0" exclude-result-prefixes="xlink mml">
   <xsl:output doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN" doctype-system="http://www.w3.org/TR/html4/loose.dtd" encoding="UTF-8"/>
   <xsl:strip-space elements="*"/>
@@ -560,29 +560,6 @@
 			 		var	$newUL = document.createElement( "ul" );
 			 		$( "#rightSidebar" ).prepend( $newdiv2 );
 			 		
-			 
-			 		var	$newXML = document.createElement( "a" );
-			 		$newXML.className = "descargarArchivo";
-			 		$newXML.title = "Descargar XML";
-			 		$newXML.text = "Descargar XML";
-			 		$newXML.href = newURL.replace("view", "download");
-			 		$( "#sidebarContent" ).prepend( $newXML );
-			 
-			 		var	$newPDF = document.createElement( "a" );
-			 		$newPDF.className = "descargarArchivo";
-			 		$newPDF.title = "Descargar PDF";
-			 		$newPDF.text = "Descargar PDF";
-			 		$newPDF.href = $('meta[name=citation_pdf_url]').attr("content");
-			 		if ($('meta[name=citation_pdf_url]').attr("content") != null)
-			 			$( "#sidebarContent" ).prepend( $newPDF );
-			 
-			 		var	$newEPUB = document.createElement( "a" );
-			 		$newEPUB.className = "descargarArchivo";
-			 		$newEPUB.title = "Descargar EPUB";
-			 		$newEPUB.text = "Descargar EPUB";
-			 		$newEPUB.href = $('meta[name=citation_fulltext_html_url]').attr("content");
-			 		if ($('meta[name=citation_fulltext_html_url]').attr("content") != null)
-			 			$( "#sidebarContent" ).prepend( $newEPUB );
 			 
 			 		
 			 		$( "#sidebarContent" ).append( $newSpan );
