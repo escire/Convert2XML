@@ -19,9 +19,10 @@
 
 #### Installation
 
-1. Download and unzip the file "convertidor.zip".
-2. In IIS, create a new entry in the file "config\applicationhost.config" in "sites".
-3. Start IIS.
+1. Download and unzip the "convertidor.zip" file.
+2. Configure the "Web.config" file
+3. In IIS, create a new entry in the file "config\applicationhost.config" in "sites".
+4. Start IIS.
 
 ### Plugin
 
@@ -50,8 +51,9 @@
 #### Instalación
 
 1. Descargar y descomprimir el archivo "convertidor.zip".
-2. En IIS, crear una nueva entrada en el archivo "config\applicationhost.config" dentro de "sites".
-3. Iniciar IIS.
+2. Configurar el archivo "Web.config"
+3. En IIS, crear una nueva entrada en el archivo "config\applicationhost.config" dentro de "sites".
+4. Iniciar IIS.
 
 ### Plugin
 
