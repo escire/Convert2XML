@@ -16,14 +16,14 @@
 
 <h3>{translate key="plugins.generic.convert2xml.settings"}</h3>
 
-<form method="post" action="{plugin_url path="settings"}">
+<form method="post" action="{plugin_url path="settings"}" id="commentForm">
 {include file="common/formErrors.tpl"}
 
 <table width="100%" class="data">
 	<tr valign="top"> 
 		<td width="20%" align="left" class="label">{fieldLabel name="wsURL" required="true" key="plugins.generic.convert2xml.settings.wsURL"}</td>
 		<td width="70%" class="value">
-			<input type="text" name="wsURL" id="wsURL" value="{$wsURL}" class="textField" data-tool="{translate key="plugins.generic.convert2xml.settings.wsURLToolTip"}"/>
+			<input type="text" name="wsURL" id="wsURL" value="{$wsURL}" class="textField" data-tool="{translate key="plugins.generic.convert2xml.settings.wsURLToolTip"}" required/>
 																										<span class="fieldtip">{translate key="plugins.generic.convert2xml.settings.wsURLToolTip"}</span>
 		</td>
 	</tr>
@@ -74,6 +74,11 @@
 </div>
 
 {literal}
+
+<script>
+	$("#commentForm").validate();
+</script>
+
 <style type="text/css">
 
 table#requisitosConverter {
