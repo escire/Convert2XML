@@ -19,7 +19,7 @@ using Newtonsoft.Json.Linq;
 
 namespace jats
 {
-    public partial class convert : System.Web.UI.Page
+    public partial class convert : BasePage
     {
         
         Dictionary<string, string> mensaje = new Dictionary<string, string>();
@@ -136,16 +136,16 @@ namespace jats
 
                     crearCarpea(rutaAlmacenar);
                     subirArchivo.SaveAs(rutaAlmacenar + nombreAleatorio);
-                    statusLabel.Text = "Archivo cargado correctamente";
+                    statusLabel.Text = HttpContext.GetGlobalResourceObject("Languaje", "uploadedCorrectly")+""; 
                     statusLabel.CssClass = "label label-success";
 
-                    labelIniciar.InnerHtml = "Iniciar conversión del archivo: " + filename;
+                    labelIniciar.InnerHtml = HttpContext.GetGlobalResourceObject("Languaje", "startFileConversion")+"";
                     inicarConversion.Enabled = true;
 
                 }
                 catch (Exception ex)
                 {
-                    statusLabel.Text = "Error, no fue posible subir archivo. Error encontrado: " + ex.Message;
+                    statusLabel.Text = HttpContext.GetGlobalResourceObject("Languaje", "errorEncountered")+"" + ex.Message;
                     statusLabel.CssClass = "label label-danger";
                 }
             }
@@ -269,8 +269,8 @@ namespace jats
                     divUpload.Visible = false;
                     divCargando.Visible = false;
                     divErrorConversion.Visible = true;
-                    LabelError.Text = "Error en webService, no se puede comprimir el archivo, intentelo más tarde";
-                    res.Add("mensaje", "Error en webService, no se puede comprimir el archivo, intentelo más tarde");
+                    LabelError.Text = HttpContext.GetGlobalResourceObject("Languaje", "tryLater") + "";
+                    res.Add("mensaje", HttpContext.GetGlobalResourceObject("Languaje", "tryLater") + "");
                 }
             }
             else //no se genero archivo nuevo

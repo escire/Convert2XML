@@ -136,7 +136,7 @@ namespace jats
                     }
                     if (articulo.Seccion == null)
                     {
-                        mensaje = "Error en formato de documento Word: No se encuetra Sección de la Revista";
+                        mensaje = HttpContext.GetGlobalResourceObject("Languaje", "NotFoundSection") + "";
                         doc.Close(WdSaveOptions.wdDoNotSaveChanges, ref miss, ref miss);
                         doc = null;
                         word.Quit();
@@ -167,7 +167,7 @@ namespace jats
                     }
                     if (articulo.Titulo == null)
                     {
-                        mensaje = "Error en formato de documento Word: No se encuetra Titulo principal del artículo";
+                        mensaje = HttpContext.GetGlobalResourceObject("Languaje", "NotFoundTitle") + "";
                         doc.Close(WdSaveOptions.wdDoNotSaveChanges, ref miss, ref miss);
                         doc = null;
                         word.Quit();
@@ -1099,7 +1099,7 @@ namespace jats
                 {
                     log += "<br/>Error: " + e.StackTrace;
                     System.Console.Error.WriteLine("exception: {0}", e);
-                    mensaje = "Error al procesar documento: consulte a su administrador";
+                    mensaje = HttpContext.GetGlobalResourceObject("Languaje", "GeneralError") + "";
                     doc.Close(WdSaveOptions.wdDoNotSaveChanges, ref miss, ref miss);
                     doc = null;
                     word.Quit();
@@ -1112,7 +1112,7 @@ namespace jats
             }
             else
             {
-                mensaje = "Error: Archivo no existe, verifique sus rutas";
+                mensaje = mensaje = HttpContext.GetGlobalResourceObject("Languaje", "GeneralError") + "";
                 return false;
             }
             return false;

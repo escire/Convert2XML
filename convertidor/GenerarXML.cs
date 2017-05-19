@@ -1138,14 +1138,14 @@ namespace jats
                 }
                 catch (Exception e)
                 {
-                    mensaje = "Error: No es posible generar estructura de archivo XML";
+                    mensaje = HttpContext.GetGlobalResourceObject("Languaje", "GeneralError") + " XML";
                     return false;
                 }
 
             }
             else
             {
-                mensaje = "Error: No es posible generar XML por que no se ha procesado documento";
+                mensaje = HttpContext.GetGlobalResourceObject("Languaje", "GeneralError") + " XML";
                 return false;
             }
             return true;

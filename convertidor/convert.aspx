@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="convert.aspx.cs" Inherits="jats.convert" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="convert.aspx.cs" Inherits="jats.convert" UICulture="auto" Culture="auto"%>
 
 <!DOCTYPE html>
 
@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Upload File</title>
+    <title><asp:Literal runat="server" Text="<%$Resources:Languaje,newConversion%>" /></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -95,18 +95,18 @@
     <form id="form1" runat="server">
     <asp:Panel ID="divUpload" runat="server">
         <div class="panel  panel-info">
-              <div class="panel-heading">Nueva Conversión</div>
+              <div class="panel-heading"><asp:Literal runat="server" Text="<%$Resources:Languaje,newConversion%>" /></div>
                     <br />
                     <div class="row">
                         <div class="col-md-6">
                             <div class="page-header">
-                              <h4>Selecciona archivo: <small>(docx)</small></h4>
+                              <h4><asp:Literal runat="server" Text="<%$Resources:Languaje,seletFile%>" /> <small>(docx)</small></h4>
                             </div>
                         </div>
                         <div class="col-md-6">
                                 <asp:FileUpload ID="subirArchivo" runat="server" CssClass="btn btn-default" AllowMultiple="false" accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
                                 <br />
-                                <asp:Button runat="server" id="subirBoton" text="Upload" onclick="subirBoton_Click" CssClass="btn btn-primary"/>
+                                <asp:Button runat="server" id="subirBoton" text="<%$Resources:Languaje,upload%>" onclick="subirBoton_Click" CssClass="btn btn-primary"/>
                                 <br />
                                 <asp:Label runat="server" id="statusLabel" text="" />
                         </div>
@@ -118,7 +118,7 @@
                               <h4 runat="server" id="labelIniciar"></h4>
                         </div>
                         <div class="col-md-6">
-                            <asp:Button runat="server" id="inicarConversion" text="Iniciar !" onclick="inicarConversion_Click" CssClass="btn btn-primary" Enabled="false"/>
+                            <asp:Button runat="server" id="inicarConversion" text="<%$Resources:Languaje,start%>" onclick="inicarConversion_Click" CssClass="btn btn-primary" Enabled="false"/>
                         </div>
                     </div> 
 
@@ -128,33 +128,32 @@
     </asp:Panel>
     
     <asp:Panel  runat="server" ID="divErrorReq" Visible="false">
-        <h4>No se cumplen los requerimientos</h4>
+        <h4><asp:Literal runat="server" Text="<%$Resources:Languaje,noRequirements%>" /></h4>
         <ul class="list-group">
-            
-            <li class="list-group-item">Título de la Revista</li>
-            <li class="list-group-item">Abreviatura de la Revista</li>
-            <li class="list-group-item">ISSN impreso de la Revista</li>
-            <li class="list-group-item">Editorial/Institución de la revista</li>
-            <li class="list-group-item">Número de cada artículo a convertir (volumen, número y año)</li>
-            <li class="list-group-item">Páginas de cada artículo a convertir</li>
-            <li class="list-group-item">Fecha de publicación de cada artículo a convertir</li>
+            <li class="list-group-item"><asp:Literal runat="server" Text="<%$Resources:Languaje,r1%>" /></li>
+            <li class="list-group-item"><asp:Literal runat="server" Text="<%$Resources:Languaje,r2%>" /></li>
+            <li class="list-group-item"><asp:Literal runat="server" Text="<%$Resources:Languaje,r3%>" /></li>
+            <li class="list-group-item"><asp:Literal runat="server" Text="<%$Resources:Languaje,r4%>" /></li>
+            <li class="list-group-item"><asp:Literal runat="server" Text="<%$Resources:Languaje,r5%>" /></li>
+            <li class="list-group-item"><asp:Literal runat="server" Text="<%$Resources:Languaje,r6%>" /></li>
+            <li class="list-group-item"><asp:Literal runat="server" Text="<%$Resources:Languaje,r7%>" /></li>
         </ul>
     </asp:Panel>
 
     <asp:Panel runat="server" ID="divCargando" Visible="false">
         <br />
-        <h3>Convirtiendo ..</h3>
+        <h3><asp:Literal runat="server" Text="<%$Resources:Languaje,converting%>" /></h3>
         <asp:Image ID="Image1" runat="server" ImageUrl="~/img/cargando.gif"/>
     </asp:Panel>
 
     <asp:Panel runat="server" ID="divErrorConversion" Visible="false">
-        <h3>No fue posible realizar la conversión</h3>
+        <h3><asp:Literal runat="server" Text="<%$Resources:Languaje,notConvert%>" /></h3>
         <asp:Label ID="LabelError" runat="server" Text="Label"></asp:Label>
     </asp:Panel>
 
 
     <asp:Panel runat="server" ID="divExito" Visible="false">
-        <h3>Descargando...</h3>
+        <h3><asp:Literal runat="server" Text="<%$Resources:Languaje,downloading%>" /></h3>
         <img src="img/descargar.png" />
     </asp:Panel>
         
