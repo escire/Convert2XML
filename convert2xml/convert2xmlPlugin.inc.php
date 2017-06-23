@@ -279,7 +279,7 @@ class convert2xmlPlugin extends GenericPlugin {
 			$templateMgr = TemplateManager::getManager();			
 		}
 		
-		$cadena .= "<a href=\"#\" target=\"popup\"  onClick=\"window.open(\'".$urls."\',\'Convert2xml\',\'titlebar=Convert2xml,top=100,left=250,width=450,height=350\'); return false;\"  >".AppLocale::translate('plugins.generic.convert2xmlPlugin.href')."</a>";
+		$cadena .= "<a href=\"#\" target=\"popup\"  onClick=\"window.open(\'".$urls."\',\'Convert2xml\',\'titlebar=Convert2xml,top=100,left=250,width=450,height=400\'); return false;\"  >".AppLocale::translate('plugins.generic.convert2xmlPlugin.href')."</a>";
 		
 		$requerimientos="";
 		if( $mostrarRequerimientos ==true)
